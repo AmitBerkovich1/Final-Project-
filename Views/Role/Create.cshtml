@@ -1,0 +1,23 @@
+﻿@using FinalProject.ViewModel
+@model CreateRoleViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="title">Title</label>
+        <input asp-for="title" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="jobDescription">Job Description</label>
+        <input asp-for="jobDescription" class="form-control" placeholder="Enter description">
+    </div>
+    <div class="form-group">
+        <label asp-for="maxHours">Max Hours</label>
+        <input asp-for="maxHours" class="form-control" placeholder="Enter Max Hours">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

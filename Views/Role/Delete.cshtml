@@ -1,0 +1,27 @@
+﻿@model Role
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Are You Sure?</h2>
+<form method="post" asp-action="Delete">
+    <div class="form-group">
+        <label asp-for="title">Title</label>
+        <input asp-for="title" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="jobDescription">Job Description</label>
+        <input asp-for="jobDescription" class="form-control" placeholder="Enter description">
+    </div>
+    <div class="form-group">
+        <label asp-for="maxHours">Max Hours</label>
+        <input asp-for="maxHours" class="form-control" placeholder="Enter Max Hours">
+    </div>
+</form>
+<div class="form-group">
+    <form action="Delete" method="post">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    </form>
+</div>

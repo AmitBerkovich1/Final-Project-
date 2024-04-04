@@ -1,0 +1,31 @@
+﻿@model DangerLevel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Are You Sure?</h2>
+<form method="post" asp-action="Delete" asp-route-id="@Model.id">
+    <div class="form-group">
+        <label asp-for="id">id</label>
+        <input asp-for="id" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="level">level</label>
+        <input asp-for="level" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="title">Title</label>
+        <input asp-for="title" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="description">Job Description</label>
+        <input asp-for="description" class="form-control" placeholder="Enter description">
+    </div>
+</form>
+<div class="form-group">
+    <form action="Delete" method="post">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    </form>
+</div>

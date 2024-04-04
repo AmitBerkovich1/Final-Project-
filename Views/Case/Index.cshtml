@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Case>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a type="btn btn-success"
+   asp-controller="Case" asp-action="Create" class="btn btn-outline-secondary" type="button">Create</a>
+<div class="col-md-6">
+    @foreach (var item in Model)
+    {
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+            <h1>@item.company?.name</h1>
+            <h2>@item.requiredDate</h2>
+
+            <img class="card-img-bottom" height="250" width="250" src="~/css/images/case.png"/>
+            <a type="btn btn-success"
+               asp-controller="Case" asp-action="Details" asp-route-id="@item.id" class="btn btn-outline-secondary" type="button">View</a>
+            <a type="btn btn-success"
+               asp-controller="Case" asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-secondary" type="button">Edit</a>
+            <a type="btn btn-success"
+               asp-controller="Case" asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-secondary" type="button">Delete</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,37 @@
+﻿@using FinalProject.ViewModel
+@model EditCaseViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="post" asp-action="Edit" asp-route-id="@Model.id">
+    <div class="form-group">
+        <label asp-for="reqiredDate">reqiredDate</label>
+        <input asp-for="reqiredDate" class="form-control" placeholder="Enter reqiredDate">
+    </div>
+    <div class="form-group">
+        <label asp-for="assedHours">assedHours</label>
+        <input asp-for="assedHours" class="form-control" placeholder="Enter assedHours">
+    </div>
+    <div class="form-group">
+        <select asp-for="companyId">
+            <option value="">-- Select Company --</option>
+            @foreach (var item in Model.companies)
+            {
+                <option value="@item.id">@item.name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <select asp-for="dangerId">
+            <option value="">-- Select DangerLevel --</option>
+            @foreach (var item in Model.dangerLevels)
+            {
+                <option value="@item.id">@item.level</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

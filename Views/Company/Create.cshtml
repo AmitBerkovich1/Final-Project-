@@ -1,0 +1,29 @@
+﻿@using FinalProject.ViewModel
+@using FinalProject.Repository
+@model CreateCompanyViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="name">Name</label>
+        <input asp-for="name" class="form-control" placeholder="Enter title">
+    </div>
+    <div class="form-group">
+        <label asp-for="headquarters">headquarters</label>
+        <input asp-for="headquarters" class="form-control" placeholder="Enter description">
+    </div>
+    <div class="form-group">
+        <select asp-for="businessId">
+            <option value="">-- Select Line Of Business --</option>
+            @foreach (var item in Model.lines)
+            {
+                <option value="@item.id">@item.title</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
