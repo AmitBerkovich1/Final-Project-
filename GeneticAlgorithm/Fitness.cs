@@ -37,6 +37,12 @@ namespace FinalProject.GeneticAlgorithm
             {
                 totalFitness += (needed[item.Key] - item.Value);
             }
+            //If one of the employees is yet to be assaigned - better result
+            foreach (Employee emp in team)
+            {
+                if (emp.hoursAssigned == 0)
+                    totalFitness -= 5;
+            }
             //Danger Level Considiration - High Level -> High Role
             return totalFitness;
         }
@@ -52,7 +58,7 @@ namespace FinalProject.GeneticAlgorithm
             }
             return count;
         }
-        private static Dictionary<Role, float> CalculateNeededHours(HashSet<Role> roles, Case c)
+        public static Dictionary<Role, float> CalculateNeededHours(HashSet<Role> roles, Case c)
         {
             Dictionary<Role, float> neededHours = new Dictionary<Role, float>();
             foreach (Role role in roles)

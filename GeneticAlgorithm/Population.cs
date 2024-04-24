@@ -1,28 +1,43 @@
 ﻿using FinalProject.Models;
+using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace FinalProject.GeneticAlgorithm
 {
     public class Population
     {
-        public SortedSet<Chromosome> population { get; set; }
-        public static Fitness fitness { get; set; }
+        public PriorityQueue<Chromosome,float> population { get; set; }
+        public Fitness fitness { get; set; }
 
-        public Population()
+        public Population(List<Employee> employees, HashSet<Role> roles, Case c)
         {
-            population = new SortedSet<Chromosome>();
-        }
-        public void IntiallizePopulation(List<Employee> employees, Case c, int size, HashSet<Role> roles)
-        {
+            population = new PriorityQueue<Chromosome, float>();
             fitness = new Fitness(employees, roles, c);
+        }
+        public void IntiallizePopulation(List<Employee> employees, int size, HashSet<Role> roles)
+        {
+            Chromosome myChromosome;
             for (int i = 0; i < 100; i++)
             {
-                this.population.Add(new Chromosome(employees, size, fitness));
+                myChromosome = new Chromosome(employees, size);
+                myChromosome.fitness = fitness.CalculateFitness(myChromosome.myTeam);
+                population.Enqueue(myChromosome, fitness.CalculateFitness(myChromosome.myTeam));
             }
         }
 
-        public Population NextGeneration()
+        public HashSet<Chromosome> GetByHashSet()
         {
-            throw new NotImplementedException();
+            HashSet<Chromosome> chromosomes = new HashSet<Chromosome>();
+            int numOfItration = population.Count;
+            for (int i = 0;i < numOfItration;i++)
+            {
+                chromosomes.Add(population.Dequeue());
+            }
+            foreach (Chromosome chromosome in chromosomes)
+            {
+                population.Enqueue(chromosome, chromosome.fitness);
+            }
+            return chromosomes;
         }
     }
 }

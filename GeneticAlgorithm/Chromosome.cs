@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace FinalProject.GeneticAlgorithm
 {
-    public class Chromosome : IComparer<Chromosome>
+    public class Chromosome : IComparable<Chromosome>
     {
         public HashSet<Employee> myTeam { get; set; }
         public float fitness { get; set; }
@@ -15,30 +15,27 @@ namespace FinalProject.GeneticAlgorithm
             myTeam = new HashSet<Employee>();
             fitness = 0;
         }
-        public Chromosome(List<Employee> potnialGenes, int size, Fitness fitness)
+        public Chromosome(List<Employee> potnialGenes, int size)
         {
             myTeam = CreateRandom(potnialGenes, size);
-            this.fitness = fitness.CalculateFitness(myTeam);
         }
 
         public HashSet<Employee> CreateRandom(List<Employee> employees, int size)
         {
             HashSet<Employee> buildTeam = new HashSet<Employee>();
-            Random rnd = new Random();
             int randomIndex;
 
-            while (myTeam.Count < size)
+            while (buildTeam.Count < size)
             {
-                randomIndex = rnd.Next(employees.Count);
+                randomIndex = MainAssigningClass.rnd.Next(employees.Count);
                 buildTeam.Add(employees[randomIndex]);
             }
 
             return buildTeam;
         }
-
-        public int Compare(Chromosome? x, Chromosome? y)
+        public int CompareTo(Chromosome? other)
         {
-            return y.fitness.CompareTo(x?.fitness);
+           return this.fitness.CompareTo(other.fitness);
         }
     }
 }

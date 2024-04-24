@@ -4,54 +4,55 @@ namespace FinalProject.GeneticAlgorithm
 {
     public class Crossover
     {
-        public static Chromosome MyCrossover(Chromosome parent1, Chromosome parent2, Fitness fitness)
+        public static Chromosome MyCrossover(Chromosome parent1, Chromosome parent2,Population population,List<Employee> emp)
         {
             Chromosome merge = new Chromosome();
             Employee[] employees1 = parent1.myTeam.ToArray();
             Employee[] employees2 = parent2.myTeam.ToArray();
             int randomIndex1, randomIndex2;
-            Random rnd = new Random();
 
             while (merge.myTeam.Count < parent1.myTeam.Count)
             {
-                randomIndex1 = rnd.Next(employees1.Length);
-                randomIndex2 = rnd.Next(employees2.Length);
+                randomIndex1 = MainAssigningClass.rnd.Next(employees1.Length);
+                randomIndex2 = MainAssigningClass.rnd.Next(employees2.Length);
                 merge.myTeam.Add(employees1[randomIndex1]);
                 if (merge.myTeam.Count < parent1.myTeam.Count)
                     merge.myTeam.Add(employees2[randomIndex2]);
             }
+            if (Mutation.ShouldMutate())
+                Mutation.Mutate(merge, emp, population);
 
-            merge.fitness = fitness.CalculateFitness(merge.myTeam);
+            merge.fitness = population.fitness.CalculateFitness(merge.myTeam);
 
             return merge;
         }
-        public static Chromosome[] TwoParents(HashSet<Chromosome> parents,Fitness fitness)
+        public static PriorityQueue<Chromosome,float> NewGeneration(HashSet<Chromosome> parents,Population population,List<Employee> employees)
         {
             Chromosome[] parentsArray = parents.ToArray();
             HashSet<Chromosome> descendant = new HashSet<Chromosome>();
+            PriorityQueue<Chromosome,float> newPopulation = new PriorityQueue<Chromosome,float>();
             int randomIndex1, randomIndex2;
-            Random rnd = new Random();
 
-            while (descendant.Count < (parents.Count / 0.2) * 0.8)
+            while (descendant.Count < parents.Count * 4)
             {
-                randomIndex1 = rnd.Next(parents.Count);
-                randomIndex2 = rnd.Next(parents.Count);
+                randomIndex1 = MainAssigningClass.rnd.Next(parents.Count);
+                randomIndex2 = MainAssigningClass.rnd.Next(parents.Count);
                 if (randomIndex1 != randomIndex2)
                 {
-                    descendant.Add(MyCrossover(parentsArray[randomIndex1], parentsArray[randomIndex2],fitness));
+                    descendant.Add(MyCrossover(parentsArray[randomIndex1], parentsArray[randomIndex2],population,employees));
                 }
             }
 
             foreach (Chromosome c in descendant)
             {
-                parents.Add(c);
+                newPopulation.Enqueue(c,c.fitness);
+            }
+            foreach (Chromosome c in parents)
+            {
+                newPopulation.Enqueue(c, c.fitness);
             }
 
-            return parents.ToArray();
-        }
-        public static Chromosome Mutate(Chromosome descendant)
-        {
-            throw new NotImplementedException();
+            return newPopulation;
         }
     }
 }

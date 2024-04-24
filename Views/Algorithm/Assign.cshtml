@@ -1,0 +1,16 @@
+﻿@model Dictionary<Case, HashSet<Employee>>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@foreach (var item in Model)
+{
+    <a type="btn btn-success"
+       asp-controller="Case" asp-action="Details" asp-route-id="@item.Key.id" class="btn btn-outline-secondary" type="button">Case</a>
+    foreach (Employee emp in item.Value)
+    {
+        <h3>@emp.firstName</h3>
+    }
+}
