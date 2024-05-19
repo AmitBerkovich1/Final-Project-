@@ -1,16 +1,42 @@
-﻿@model Dictionary<Case, HashSet<Employee>>
+﻿@model ShowResults
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+<style>
+    .overload {
+        color : red
+    }
+    .okay {
+        color : darkblue
+    }
+    .fitness {
+        color : lightcoral
+    }
+</style>
 
-@foreach (var item in Model)
+@{ int i = 0; }
+
+
+@foreach (var item in Model.allTeams)
 {
     <a type="btn btn-success"
-       asp-controller="Case" asp-action="Details" asp-route-id="@item.Key.id" class="btn btn-outline-secondary" type="button">Case</a>
-    foreach (Employee emp in item.Value)
+    asp-controller="Case" asp-action="Details" asp-route-id="@item.Key.id" class="btn btn-outline-secondary" type="button">@item.Key.company.name</a>
+    foreach (Employee emp in item.Value.myTeam)
     {
-        <h3>@emp.firstName</h3>
+        float empHours = Model.neededHours[i][emp.role] / Model.roleAppearance[i][emp.role];
+        if (emp.hoursAssigned > emp.role.maxHours)
+        {
+            <h3 class="overload">@emp.firstName @emp.lastName - @empHours Hours</h3>
+        }
+        else
+        {
+            <h3 class="okay">@emp.firstName @emp.lastName - @empHours Hours</h3>
+        }
     }
+    <h4 class="fitness">Fitness Score: @item.Value.fitness</h4>
+    <img src="~/css/images/afterfinished.png" height="250" width="250"/>
+    <br />
+    i++;
 }

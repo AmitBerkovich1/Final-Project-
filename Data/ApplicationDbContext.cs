@@ -14,7 +14,6 @@ namespace FinalProject.Data
         public DbSet<Employee> employees { get; set; }
         public DbSet<Role> roles { get; set; }
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
-        public DbSet<Team> team { get; set; }
         public DbSet<Company> company { get; set; }
     }
 }
