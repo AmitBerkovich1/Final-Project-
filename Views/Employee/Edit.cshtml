@@ -16,14 +16,6 @@
         <input asp-for="lastName" class="form-control" placeholder="Enter last name">
     </div>
     <div class="form-group">
-        <label asp-for="hoursAssigned">hours assigned</label>
-        <input asp-for="hoursAssigned" class="form-control" placeholder="Enter hours assigned">
-    </div>
-    <div class="form-group">
-        <label asp-for="salary">Salary</label>
-        <input asp-for="salary" class="form-control" placeholder="Enter Salary">
-    </div>
-    <div class="form-group">
         <select asp-for="roleId">
             <option value="">-- Select Role --</option>
             @foreach (var item in Model.roles)

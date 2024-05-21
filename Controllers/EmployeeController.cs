@@ -43,7 +43,6 @@ namespace FinalProject.Controllers
                 employee.role = myRole;
                 employee.firstName = employeeVM.firstName;
                 employee.lastName = employeeVM.lastName;
-                employee.salary = employeeVM.salary;
                 _employeeRepository.Add(employee);
                 return RedirectToAction("Index");
             }
@@ -63,7 +62,6 @@ namespace FinalProject.Controllers
                 id = employee.id,
                 firstName = employee.firstName,
                 lastName = employee.lastName,
-                salary = employee.salary,
                 hoursAssigned = employee.hoursAssigned,
                 roleId = employee.roleId
             };
@@ -84,7 +82,6 @@ namespace FinalProject.Controllers
                 id = employeeVM.id,
                 firstName = employeeVM.firstName,
                 lastName = employeeVM.lastName,
-                salary = employeeVM.salary,
                 hoursAssigned = employeeVM.hoursAssigned,
                 role = myRole,
                 roleId=employeeVM.roleId

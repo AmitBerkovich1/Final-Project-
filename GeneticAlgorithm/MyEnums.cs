@@ -30,6 +30,9 @@
         {
             DescendantAmount = 4,
             BestParentsAmount = 5,
+            JuniorHours = 50,
+            SeniorHours = 30,
+            ManagerHours = 20,
             TournamaentParentAmount = 15
         }
 

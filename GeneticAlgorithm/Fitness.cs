@@ -66,12 +66,12 @@ namespace FinalProject.GeneticAlgorithm
             Dictionary<Role, float> neededHours = new Dictionary<Role, float>();
             foreach (Role role in roles)
             {
-                if (role.title == "Junior")
-                    neededHours.Add(role, (float)(c.assedHours * 0.5));
-                else if (role.title == "Senior")
-                    neededHours.Add(role, (float)(c.assedHours * 0.3));
-                else if (role.title == "Manager")
-                    neededHours.Add(role, (float)(c.assedHours * 0.2));
+                if (role.title.ToLower() == "junior")
+                    neededHours.Add(role, (float)(c.assedHours * (float)((int)MyEnums.Precent.JuniorHours / 100.0)));
+                else if (role.title.ToLower() == "senior")
+                    neededHours.Add(role, (float)(c.assedHours * (float)((int)MyEnums.Precent.SeniorHours / 100.0)));
+                else if (role.title.ToLower() == "manager")
+                    neededHours.Add(role, (float)(c.assedHours * (float)((int)MyEnums.Precent.ManagerHours / 100.0)));
                 else
                     neededHours.Add(role, (float)(MyEnums.Hours.AdditionRoleHours));
             }

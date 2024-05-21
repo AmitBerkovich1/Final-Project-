@@ -12,7 +12,6 @@ namespace FinalProject.Models
         [ForeignKey("Role")]
         public int roleId { get; set; }
         public Role? role { get; set; }
-        public int? salary { get; set; }
         [Required]
         public int hoursAssigned { get; set; }
 
@@ -27,7 +26,6 @@ namespace FinalProject.Models
                    firstName == other.firstName &&
                    lastName == other.lastName &&
                    roleId == other.roleId &&
-                   salary == other.salary &&
                    hoursAssigned == other.hoursAssigned &&
                    ((role == null && other.role == null) || (role != null && role.Equals(other.role)));
         }
@@ -41,7 +39,6 @@ namespace FinalProject.Models
                 hash = hash * 23 + (lastName?.GetHashCode() ?? 0);
                 hash = hash * 23 + roleId.GetHashCode();
                 hash = hash * 23 + (role?.GetHashCode() ?? 0);
-                hash = hash * 23 + (salary?.GetHashCode() ?? 0);
                 hash = hash * 23 + hoursAssigned.GetHashCode();
                 return hash;
             }
